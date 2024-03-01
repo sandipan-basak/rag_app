@@ -1,0 +1,9 @@
+[submodule "embedding-gen"]
+    path = embedding-gen
+    url = git@github.com:sandipan-basak/embedding-gen.git
+[submodule "pdf-extractor"]
+    path = pdf-extractor
+    url = git@github.com:sandipan-basak/pdf-extractor.git
+[submodule "query-service"]
+    path = query-service
+    url = git@github.com:sandipan-basak/query-service.git

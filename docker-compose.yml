@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  redis:
+    image: "redis:latest"
+    container_name: my_redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - global_network
+
+  pdf-extractor:
+    build: ./pdf-extractor
+    volumes:
+      - ./pdf-extractor/src:/usr/src/app/src
+      - dataset_extraction:/usr/src/app/data
+    networks:
+      - global_network
+    env_file:
+      - ./pdf-extractor/.env
+    container_name: data-extractor
+
+  embedding-gen:
+    build: ./embedding-gen
+    volumes:
+      - ./embedding-gen/src:/usr/src/app/src
+      - dataset_extraction:/usr/src/app/data
+    networks:
+      - global_network
+    env_file:
+      - ./embedding-gen/.env
+    container_name: embeddings-indexer
+
+  query-service:
+    build: ./query-service
+    ports:
+      - "8000:80"
+    volumes:
+      - ./query-service/src:/usr/src/app/src
+      - dataset_extraction:/usr/src/app/data
+    depends_on:
+      - redis
+    networks:
+      - global_network
+    env_file:
+      - ./query-service/.env
+
+volumes:
+  dataset_extraction:
+    name: raw_data
+  redis_data:
+
+networks:
+  global_network:
+    name: one_network
+    driver: bridge
