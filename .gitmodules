@@ -1,6 +1,6 @@
 [submodule "embedding-gen"]
-    path = embedding-gen
-    url = git@github.com:sandipan-basak/embedding-gen.git
+	path = embedding-gen
+	url = git@github.com:sandipan-basak/embedding-gen.git
 [submodule "pdf-extractor"]
     path = pdf-extractor
     url = git@github.com:sandipan-basak/pdf-extractor.git
