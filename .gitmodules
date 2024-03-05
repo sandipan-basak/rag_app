@@ -7,3 +7,6 @@
 [submodule "query-service"]
     path = query-service
     url = git@github.com:sandipan-basak/query-service.git
+[submodule "chat-with-gpt"]
+	path = chat-with-gpt
+	url = git@github.com:sandipan-basak/chat-with-gpt.git

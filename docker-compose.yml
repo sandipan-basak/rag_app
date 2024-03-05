@@ -46,6 +46,19 @@ services:
     env_file:
       - ./query-service/.env
 
+  fullstack-app:
+    build: ./chat-with-gpt
+    container_name: fullstack-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./chat-with-gpt/data:/app/data
+      - ./chat-with-gpt/server/src:/usr/src/app/src
+    networks:
+      - global_network
+    depends_on:
+      - query-service
+
 volumes:
   dataset_extraction:
     name: raw_data

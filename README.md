@@ -38,7 +38,7 @@ The Embedding Generator Service's indexing takes about 15 minutes due to the lar
 
 ### Query Service
 - **Location**: `./query-service/.env`
-- **Contents**: Must include `COHERE_API_KEY` and `OPENAI_API_KEY`.
+- **Contents**: Must include `COHERE_API_KEY`.
 
 **NOTE:** For the query service, ensure your `.env` file includes the following environment variables, crucial for its operation:
 
@@ -47,7 +47,6 @@ COHERE_API_KEY=<cohere_api_key>
 FAISS_INDEX_PATH=/usr/src/app/data/indices/combined_index.index
 FAISS_METADATA_PATH=/usr/src/app/data/indices/metadata.json
 REDIS_URL=redis://redis:6379
-OPEN_API_KEY=<openai_api_key>
 ```
 ## Running the Services
 Use Docker Compose to orchestrate the services. The docker-compose.yml file references all submodules and services, ensuring they are networked and started in the correct sequence.
@@ -64,11 +63,13 @@ Start the Embedding Generator Service: After PDF extraction, process the documen
 docker-compose build embedding-gen
 docker-compose up embedding-gen
 ```
-Start the Query Service: With embeddings generated and PDFs extracted, the query service can now provide endpoint access to search and summarize documents.
+Start the Fullstack Application: With embeddings generated and PDFs extracted, the query service can now provide endpoint access to search and summarize documents and this would be used directly by the fullstack application with proper UI and server implementation.
+
+### Note: Please enter the API key in the UI, so that it can use `https://openai.com/` instead of the server api to stream the data. You can skip the signing in process but don't skip the browser api input.
 
 ```sh
-docker-compose build query-service
-docker-compose up query-service
+docker-compose build --no-cache fullstack-app
+docker-compose up fullstack-app
 ```
 Ensure that the .env files for each service are correctly configured before starting them.
 
