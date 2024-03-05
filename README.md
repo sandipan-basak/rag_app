@@ -73,17 +73,17 @@ docker-compose up fullstack-app
 ```
 Ensure that the .env files for each service are correctly configured before starting them.
 
-### API Usage
+### Curl Usage
 
-Once the application is running, you can send queries to the /query endpoint using a tool like curl or Postman. Here is an example using curl:
+You can host the query-service separately to get the new prompt that would be created based on the retrieved chunks of documents from the retrival system.
 
 ```sh
 curl -X 'POST' \
-  'http://localhost:8000/query' \
+  'http://localhost:8000/create-prompt' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "queries": ["<your query here>"]
+  "query": "<your query here>"
 }'
 ```
 
